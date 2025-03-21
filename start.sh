@@ -1299,6 +1299,9 @@ updateAgent() {
   download_from_net "nezha-agent"
   if [[ -e "nezha-agent" ]]; then
     chmod +x ./nezha-agent
+  else
+    red "下载失败!"
+    return
   fi
   startNeZhaAgent
   green "更新完毕!"
@@ -1425,12 +1428,15 @@ installNeZhaDashboard() {
     red "面板已安装,重新安装请先卸载!"
     return 1
   fi
-  if ! download_from_net "dashboard"; then
+  if ! download_from_net "nezha-dashboard"; then
     return 1
   fi
   if [[ -e "dashboard" ]]; then
     mv ./dashboard ./nezha-dashboard
     chmod +x ./nezha-dashboard
+  else
+    red "下载失败!"
+    return 1
   fi
 
   #自动分配端口
