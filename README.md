@@ -5,12 +5,12 @@
 ## 前置工作
 
 1. 你需要有一个 serv00/hostuno 帐号
-2. 首次运行，无需使用面板，选 1 安装 serv00-play, 它会自动重新登录，输入 ss 回车进入界面。(以后都是输入 ss 回车进入界面)
+2. 运行安装命令后重新登录，输入 ss 回车进入界面。(以后都是输入 ss 回车进入界面)
 
 ## 安装说明
 
 ```s
-bash <(curl -Ls https://raw.githubusercontent.com/frankiejun/serv00-play/main/start.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/frankiejun/serv00-play/main/start.sh) --install
 ```
 
 ## 变量说明
@@ -82,13 +82,17 @@ argo+vmess 的搭建教学看[这里](https://youtu.be/nmb2F6uBKsg?si=v8twWIkIjs
 ## 赞助
 
 <left><details><summary><strong> [点击展开] 请作者喝杯咖啡 ~🧧</strong></summary>
-_捐赠将是对我最大的支持，它将激励我持续的创新和创作。捐赠>=5u, 可联系我加入饭友会会员群_
+_捐赠将是对我最大的支持，它将激励我持续的创新和创作。捐赠>=5u, 可联系我加入饭友会会员群, 捐赠>=10u, 加入赞助人感谢名单_
 
 ![](https://look.pics.cloudns.ch/img/%E6%AC%A7%E6%98%93%E8%B5%9E%E5%8A%A9%E7%A0%81.png)
 
 - **USDT-TRC20:** `TUa2hLirmyq6tUPpfxHuMmWJExR91vHo5t`
 
 </details></left>
+
+| 赞助人                                                                              | 赞助方式   | 备注 |
+| ----------------------------------------------------------------------------------- | ---------- | ---- |
+| [HostVds](https://hostvds.com/?affiliate_uuid=2b9179a7-6900-4636-bed2-182b4db0168e) | 提供服务器 |      |
 
 ## 项目鸣谢
 

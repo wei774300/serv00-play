@@ -25,6 +25,7 @@ fi
 
 PS3="请选择(输入0退出): "
 install() {
+  local input=$1
   cd ${installpath}
   if [ -d "serv00-play" ]; then
     cd "serv00-play"
@@ -70,13 +71,16 @@ install() {
   chmod +x ${installpath}/serv00-play/singbox/killsing-box.sh
   chmod +x ${installpath}/serv00-play/singbox/autoUpdateHyIP.sh
   chmod +x ${installpath}/serv00-play/ssl/cronSSL.sh
-  read -p "$(yellow 设置完毕,需要重新登录才能生效，是否重新登录？[y/n] [y]:)" input
-  input=${input:-y}
+  if [ -z "$input" ]; then
+    read -p "$(yellow 设置完毕,需要重新登录才能生效，是否重新登录？[y/n] [y]:)" input
+    input=${input:-y}
+  fi
+  echo -e "${YELLOW}安装成功${RESET}"
 
   if [ "$input" = "y" ]; then
     kill -9 $PPID
   fi
-  echo -e "${YELLOW}安装成功${RESET}"
+
 }
 
 showSingBoxInfo() {
@@ -1080,8 +1084,11 @@ ImageRecovery() {
 }
 
 uninstall() {
-  read -p "确定卸载吗? [y/n] [n]:" input
-  input=${input:-n}
+  local input=$1
+  if [ -z "$input" ]; then
+    read -p "确定卸载吗? [y/n] [n]:" input
+    input=${input:-n}
+  fi
 
   if [ "$input" == "y" ]; then
     delCron
@@ -3279,15 +3286,17 @@ installkeepAlive() {
 }
 
 uninstallkeepAlive() {
+  local input=$1
   local domain=$(getUserDoMain)
   domain="${domain,,}"
   local domainPath="${installpath}/domains/$domain/public_nodejs"
-  read -p "是否卸载? [y/n] [n]:" input
-  input=${input:-n}
-  if [[ "$input" != "y" ]]; then
-    return 1
+  if [ -z "$input" ]; then
+    read -p "是否卸载? [y/n] [n]:" input
+    input=${input:-n}
+    if [[ "$input" != "y" ]]; then
+      return 1
+    fi
   fi
-  domainPath="${installpath}/domains/$domain/public_nodejs"
   if ! delDefaultDomain; then
     return 1
   fi
@@ -3522,4 +3531,14 @@ showMenu() {
 
 }
 
-showMenu
+if [ "$1" == "--uninstall" ]; then
+  echo "执行卸载操作"
+  uninstall "y"
+  exit 0
+elif [ "$1" == "--install" ]; then
+  echo "执行更新操作"
+  install "y"
+  exit 0
+else
+  showMenu
+fi
