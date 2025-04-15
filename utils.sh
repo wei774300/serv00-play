@@ -260,7 +260,7 @@ getDoMain() {
   if isServ00; then
     echo -n "serv00.com"
   else
-    echo -n "useruno.com"
+    echo -n "hostuno.com"
   fi
 }
 
@@ -780,4 +780,20 @@ start_sing_box() {
     red "启动失败!"
   fi
 
+}
+
+checkCronNameStatus() {
+  if checkCronName $1; then
+    green "在线"
+  else
+    red "离线"
+  fi
+}
+checkCronName() {
+  local name=$1
+  if crontab -l | grep -q "$name"; then
+    return 0
+  else
+    return 1
+  fi
 }
